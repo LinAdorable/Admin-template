@@ -7,13 +7,14 @@
  * @FilePath: \technical-drill\src\main.ts
  */
 import { createApp } from 'vue'
-import App from './App.vue'
+import App from '@/App.vue'
 // 引入 sorte 
-import store  from './store'
+import store  from '@/store'
 // 引入路由
-import router from './router'
+import router from '@/router'
 // 引入全局样式
 import '@/styles/global.scss'
+
 import 'virtual:svg-icons-register';
 
  const app = createApp(App)

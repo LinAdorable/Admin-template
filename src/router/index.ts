@@ -6,6 +6,8 @@
  * @Description: 
  * @FilePath: \technical-drill\src\router\index.ts
  */
+import Layout from '@layouts/index.vue'
+
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 
 const routes: Array<RouteRecordRaw> = [
@@ -21,7 +23,10 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/home',
     name: 'home',
-    component: () => import('@/pages/home/index.vue')
+    component:Layout,
+    children:[
+      
+    ]
   }
 ]
 const router = createRouter({

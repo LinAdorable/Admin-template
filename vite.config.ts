@@ -8,6 +8,11 @@
  */
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue' // 提供 Vue 3 单文件组件支持
+// 自动导入 Vue 相关函数，如：ref, reactive ...
+// import AutoImport from 'unplugin-auto-import/vite';
+// 自动按需引入 AntDesignVue
+import Components from 'unplugin-vue-components/vite';
+import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
 /**
  * node.js内置的功能，但是node.js本身并不支持ts
  * 需要引入 @types/node ts 类型检查提示错误
@@ -28,7 +33,14 @@ export default defineConfig({
       // 指定symbolId格式，就是svg.use使用的href
       symbolId: 'icon-[name]'
     }),
-    svgLoader()
+    svgLoader(),
+      Components({
+        resolvers: [
+          AntDesignVueResolver({
+            importStyle: false, // css in js
+          }),
+        ],
+      }),
   ],
   server: {
     port: 9109,
@@ -50,19 +62,20 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src'),
-      '@pages': resolve(__dirname, 'src/pages'),
-      '@components': resolve(__dirname, 'src/components'),
-      '@directive': resolve(__dirname, 'src/directive'),
-      '@http': resolve(__dirname, 'src/http'),
-      '@store': resolve(__dirname, 'src/store'),
+      '@': resolve(__dirname, './src'),
+      '@pages': resolve(__dirname, './src/pages'),
+      '@components': resolve(__dirname, './src/components'),
+      '@directive': resolve(__dirname, './src/directive'),
+      '@http': resolve(__dirname, './src/http'),
+      '@store': resolve(__dirname, './src/store'),
+      '@layouts': resolve(__dirname, './src/layouts'),
     }
   },
   css: {
     preprocessorOptions: {
       scss: {
         // 这里配置 xxx.scss 混合文件的全局引入
-        // additionalData: `@import "./src/styles/variables.scss";`
+        // additionalData: `@import "src/styles/variables.scss";`
       }
     }
   }
